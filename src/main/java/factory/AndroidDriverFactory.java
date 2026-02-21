@@ -1,27 +1,27 @@
 package factory;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.options.UiAutomator2Options;
 import java.net.URL;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 
 @Singleton
 public class AndroidDriverFactory {
 
-   public WebDriver create() {
-      UiAutomator2Options options = new UiAutomator2Options();
-      options.setPlatformName("Android");
-      options.setAutomationName("UiAutomator2");
-      options.setDeviceName("emulator-5554");
-      options.setUdid("emulator-5554");
-      options.setApp("/Users/gevorg.kocharyan/IdeaProjects/otus-mobile/src/test/java/resources/wishlist.apk");
-      options.setAppPackage("ru.otus.wishlist");
+   private final Capabilities capabilities;
 
+   @Inject
+   public AndroidDriverFactory(Capabilities capabilities) {
+      this.capabilities = capabilities;
+   }
+
+   public WebDriver create() {
       try {
          return new AndroidDriver(
              new URL("http://127.0.0.1:4723"),
-             options
+             capabilities
          );
       } catch (Exception e) {
          throw new RuntimeException("Cannot create AndroidDriver", e);
@@ -33,5 +33,4 @@ public class AndroidDriverFactory {
          driver.quit();
       }
    }
-
 }

@@ -4,7 +4,9 @@ import static com.codeborne.selenide.appium.SelenideAppium.$;
 import static io.appium.java_client.AppiumBy.id;
 
 import com.codeborne.selenide.SelenideElement;
+import com.google.inject.Singleton;
 
+@Singleton
 public class LoginPage extends AbsBasePage {
 
    private final SelenideElement usernameInputField = $(

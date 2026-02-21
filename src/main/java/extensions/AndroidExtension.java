@@ -6,28 +6,18 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import factory.AndroidDriverFactory;
 import factory.AndroidDriverModule;
-import org.junit.jupiter.api.extension.AfterEachCallback;
-import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
-import org.junit.jupiter.api.extension.BeforeEachCallback;
-import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.jupiter.api.extension.TestInstancePostProcessor;
+import org.junit.jupiter.api.extension.*;
 import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
 
 public class AndroidExtension implements TestInstancePostProcessor, BeforeEachCallback,
-    AfterEachCallback, AfterTestExecutionCallback {
+    AfterEachCallback {
 
    private final Injector injector = Guice.createInjector(new AndroidDriverModule());
 
    @Override
-   public void afterEach(ExtensionContext context) {
-
-   }
-
-   @Override
-   public void afterTestExecution(ExtensionContext context) {
-      WebDriver driver = WebDriverRunner.getWebDriver();
-      injector.getInstance(AndroidDriverFactory.class).quit(driver);
+   public void postProcessTestInstance(Object testInstance, ExtensionContext context) {
+      injector.injectMembers(testInstance);
    }
 
    @Override
@@ -35,12 +25,13 @@ public class AndroidExtension implements TestInstancePostProcessor, BeforeEachCa
       WebDriver driver = injector.getInstance(WebDriver.class);
       WebDriverRunner.setWebDriver(driver);
       Selenide.open();
-      LoginPage loginPage = injector.getInstance(LoginPage.class);
-      loginPage.login("vardan","vardan.1999");
    }
 
    @Override
-   public void postProcessTestInstance(Object testInstance, ExtensionContext context) {
-      injector.injectMembers(testInstance);
+   public void afterEach(ExtensionContext context) {
+      WebDriver driver = WebDriverRunner.getWebDriver();
+      if (driver != null) {
+         injector.getInstance(AndroidDriverFactory.class).quit(driver);
+      }
    }
 }

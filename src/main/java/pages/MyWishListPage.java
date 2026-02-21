@@ -7,17 +7,18 @@ import static io.appium.java_client.AppiumBy.id;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.google.inject.Singleton;
+import components.Alert;
 import components.WishListContent;
 import components.WishListItem;
 
+@Singleton
 public class MyWishListPage extends AbsBasePage {
 
    private final WishListContent wishListContent = new WishListContent(
        $(id("wishlists")));
    private final SelenideElement addButton = $(id("add_button"));
-   private final SelenideElement confirmButton = Selenide.$(
-       id("android:id/button1"));
-
+   private final Alert alert = new Alert($(id("parentPanel")));
 
    public MyWishListPage assertsNumberOfWishLists(int expectedSize) {
       wishListContent
@@ -52,8 +53,12 @@ public class MyWishListPage extends AbsBasePage {
 
    public MyWishListPage deleteWishList(int index){
       getItem(index).tabDeleteButton();
-      click(confirmButton);
+      alert
+          .shouldBeVisible()
+          .confirm()
+          .shouldNotBeVisible();
       return this;
    }
+
 
 }
