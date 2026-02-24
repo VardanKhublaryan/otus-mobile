@@ -8,7 +8,6 @@ import factory.AndroidDriverFactory;
 import factory.AndroidDriverModule;
 import org.junit.jupiter.api.extension.*;
 import org.openqa.selenium.WebDriver;
-import pages.LoginPage;
 
 public class AndroidExtension implements TestInstancePostProcessor, BeforeEachCallback,
     AfterEachCallback {

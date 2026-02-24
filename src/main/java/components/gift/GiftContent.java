@@ -1,24 +1,26 @@
-package components;
+package components.gift;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static io.appium.java_client.AppiumBy.id;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import components.AbsComponents;
 
-public class WishListContent extends AbsComponents<WishListContent> {
+public class GiftContent extends AbsComponents<GiftContent> {
 
-   private final ElementsCollection items = root.$$(id("wishlist_item"));
+   private final ElementsCollection items = root.$$(id("gift_item"));
 
-   public WishListContent(SelenideElement root) {
+   public GiftContent(SelenideElement root) {
       super(root);
    }
 
-   public WishListItem getItem(int index) {
-      return new WishListItem(items.get(index - 1));
+   public GiftsItem getItem(int index) {
+      return new GiftsItem(items.get(index - 1));
    }
 
    public void assertSizeEquals(int expectedSize) {
       items.shouldHave(size(expectedSize));
    }
+
 }

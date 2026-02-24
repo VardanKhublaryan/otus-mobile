@@ -1,22 +1,20 @@
-package pages;
-
+package pages.wishlists;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.appium.SelenideAppium.$;
 import static io.appium.java_client.AppiumBy.id;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.google.inject.Singleton;
 import components.Alert;
-import components.WishListContent;
-import components.WishListItem;
+import components.wishlist.WishListContent;
+import components.wishlist.WishListItem;
+import pages.AbsBasePage;
 
 @Singleton
 public class MyWishListPage extends AbsBasePage {
 
-   private final WishListContent wishListContent = new WishListContent(
-       $(id("wishlists")));
+   private final WishListContent wishListContent = new WishListContent($(id("wishlists")));
    private final SelenideElement addButton = $(id("add_button"));
    private final Alert alert = new Alert($(id("parentPanel")));
 
@@ -28,21 +26,26 @@ public class MyWishListPage extends AbsBasePage {
    }
 
    public MyWishListPage assertSubTitleEquals(String expectedSubTitle, int index) {
-      getItem(index).assertSubTitleEquals(expectedSubTitle);
+      getWishListItem(index).assertSubTitleEquals(expectedSubTitle);
       return this;
    }
 
-   public MyWishListPage assertTitleEquals(String expectedTitle, int index) {
-      getItem(index).assertTitleEquals(expectedTitle);
+   public MyWishListPage assertWishListTitleEquals(String expectedTitle, int index) {
+      getWishListItem(index).assertTitleEquals(expectedTitle);
       return this;
    }
 
    public MyWishListPage tabEditWishList(int index) {
-      getItem(index).tabEdit();
+      getWishListItem(index).tabEdit();
       return this;
    }
 
-   private WishListItem getItem(int index) {
+   public MyWishListPage clickWishList(int index){
+      getWishListItem(index).tabWishList();
+      return this;
+   }
+
+   private WishListItem getWishListItem(int index) {
       return wishListContent.getItem(index).shouldBe(visible);
    }
 
@@ -52,7 +55,7 @@ public class MyWishListPage extends AbsBasePage {
    }
 
    public MyWishListPage deleteWishList(int index){
-      getItem(index).tabDeleteButton();
+      getWishListItem(index).tabDeleteButton();
       alert
           .shouldBeVisible()
           .confirm()
