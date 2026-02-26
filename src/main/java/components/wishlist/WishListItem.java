@@ -10,11 +10,11 @@ import components.AbsComponents;
 
 public class WishListItem extends AbsComponents<WishListItem> {
 
-   private final SelenideElement title = root.$(id("title"));
-   private final SelenideElement subTitle = root.$(id("subtitle"));
-   private final SelenideElement editButton = root.$(id("edit_button"));
-   private final SelenideElement deleteButton = root.$(id("delete_button"));
-   private final SelenideElement item = root.$(id("wishlist_item"));
+   private final SelenideElement title = root().$(id("title"));
+   private final SelenideElement subTitle = root().$(id("subtitle"));
+   private final SelenideElement editButton = root().$(id("edit_button"));
+   private final SelenideElement deleteButton = root().$(id("delete_button"));
+   private final SelenideElement item = root().$(id("wishlist_item"));
 
    public WishListItem(SelenideElement root) {
       super(root);
@@ -28,15 +28,15 @@ public class WishListItem extends AbsComponents<WishListItem> {
       subTitle.shouldHave(text(expectedSubTitle));
    }
 
-   public void tabDeleteButton(){
+   public void tapDeleteButton(){
       deleteButton.shouldBe(visible).click();
    }
 
-   public void tabEdit(){
+   public void tapEdit(){
       click(editButton);
    }
 
-   public void tabWishList(){
+   public void tapWishList(){
       click(item);
    }
 

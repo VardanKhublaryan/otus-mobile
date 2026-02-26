@@ -5,9 +5,9 @@ import static io.appium.java_client.AppiumBy.id;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
-public class Alert extends AbsComponents<Alert> implements PopUp {
+public class Alert extends AbsComponents<Alert> implements PopUp<Alert> {
 
-   private final SelenideElement confirmButton = root.$(id("android:id/button1"));
+   private final SelenideElement confirmButton = root().$(id("android:id/button1"));
 
    public Alert(SelenideElement root) {
       super(root);
@@ -20,13 +20,13 @@ public class Alert extends AbsComponents<Alert> implements PopUp {
 
    @Override
    public Alert shouldBeVisible() {
-      root.shouldBe(Condition.visible);
+      shouldBe(Condition.visible);
       return this;
    }
 
    @Override
    public Alert shouldNotBeVisible() {
-      root.shouldNotBe(Condition.visible);
+      shouldNotBe(Condition.visible);
       return this;
    }
 }

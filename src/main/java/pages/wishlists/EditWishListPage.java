@@ -13,12 +13,9 @@ import pages.AbsBasePage;
 public class EditWishListPage extends AbsBasePage {
 
    private final SelenideElement title = $(id("wishlist_edit_title"));
-   private final SelenideElement wishListDescriptionInputField = $(
-       id("description_input"));
-   private final SelenideElement titleInputField = $(
-       id("title_input"));
-   private final SelenideElement saveButton = $(
-       id("save_button"));
+   private final SelenideElement wishListDescriptionInputField = $(id("description_input"));
+   private final SelenideElement titleInputField = $(id("title_input"));
+   private final SelenideElement saveButton = $(id("save_button"));
 
    public EditWishListPage assertEditWishListTitle(String expectedTitle) {
       title.shouldBe(visible).shouldHave(text(expectedTitle));
@@ -32,11 +29,11 @@ public class EditWishListPage extends AbsBasePage {
       return this;
    }
 
-   public EditWishListPage addWishList(String newTitle,String newDescription) {
+   public MyWishListPage addWishList(String newTitle,String newDescription) {
       sendKey(titleInputField,newTitle);
       sendKey(wishListDescriptionInputField,newDescription);
       click(saveButton);
-      return this;
+      return new MyWishListPage();
    }
 
 }

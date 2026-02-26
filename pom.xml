@@ -40,12 +40,6 @@
     </dependency>
 
     <dependency>
-      <groupId>com.github.spotbugs</groupId>
-      <artifactId>spotbugs-annotations</artifactId>
-      <version>4.9.3</version>
-    </dependency>
-
-    <dependency>
       <groupId>at.favre.lib</groupId>
       <artifactId>bcrypt</artifactId>
       <version>0.9.0</version>
@@ -56,7 +50,6 @@
       <artifactId>postgresql</artifactId>
       <version>42.7.3</version>
     </dependency>
-
 
     <dependency>
       <groupId>com.codeborne</groupId>
@@ -97,12 +90,20 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.6.0</version>
+        <version>${maven.checkstyle.version}</version>
         <configuration>
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
-          <configLocation>${project.build.sourceDirectory}/../resources/checkstyle.xml
-          </configLocation>
+          <configLocation>${project.build.sourceDirectory}/../resources/checkstyle.xml</configLocation>
         </configuration>
+        <executions>
+          <execution>
+            <id>analyze-compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
       <plugin>
@@ -112,7 +113,7 @@
         <executions>
           <execution>
             <id>spotbugs-analysis</id>
-            <phase>verify</phase>
+            <phase>validate</phase>
             <goals>
               <goal>check</goal>
             </goals>

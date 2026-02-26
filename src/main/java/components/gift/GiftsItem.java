@@ -9,9 +9,9 @@ import components.AbsComponents;
 
 public class GiftsItem extends AbsComponents<GiftsItem> {
 
-   private final SelenideElement title = root.$(id("title"));
-   private final SelenideElement subTitle = root.$(id("subtitle"));
-   private final SelenideElement deleteButton = root.$(id("delete_button"));
+   private final SelenideElement title = root().$(id("title"));
+   private final SelenideElement deleteButton = root().$(id("delete_button"));
+   private final SelenideElement item = root().$(id("wishlist_item"));
 
 
    public void assertTitleEquals(String expectedTitle) {
@@ -22,7 +22,11 @@ public class GiftsItem extends AbsComponents<GiftsItem> {
       super(root);
    }
 
-   public void tabDeleteButton(){
+   public void tapGiftItem(){
+      click(item);
+   }
+
+   public void tapDeleteButton(){
       deleteButton.shouldBe(visible).click();
    }
 

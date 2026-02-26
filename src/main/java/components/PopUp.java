@@ -5,4 +5,5 @@ public interface PopUp<T> {
    T shouldBeVisible();
 
    T shouldNotBeVisible();
+
 }

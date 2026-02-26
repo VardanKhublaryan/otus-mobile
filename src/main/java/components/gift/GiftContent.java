@@ -9,7 +9,7 @@ import components.AbsComponents;
 
 public class GiftContent extends AbsComponents<GiftContent> {
 
-   private final ElementsCollection items = root.$$(id("gift_item"));
+   private final ElementsCollection items = root().$$(id("gift_item"));
 
    public GiftContent(SelenideElement root) {
       super(root);

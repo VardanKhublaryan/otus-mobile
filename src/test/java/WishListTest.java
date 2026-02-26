@@ -1,10 +1,9 @@
 import com.google.inject.Inject;
-import dbUtils.TestDataManager;
+import utils.dbutils.TestDataManager;
 import extensions.AndroidExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import pages.wishlists.EditWishListPage;
-import pages.HomePage;
 import pages.LoginPage;
 import pages.wishlists.MyWishListPage;
 import pages.UsersPage;
@@ -22,15 +21,15 @@ public class WishListTest {
    private EditWishListPage editWishListPage;
 
    @Inject
-   private HomePage homePage;
+   private UsersPage usersPage;
 
    @Inject
-   private UsersPage usersPage;
+   private TestDataManager testDataManager;
 
    @Test
    public void editWishListTest() {
-      TestDataManager.updateWishlistTitle("test2","Новый год");
-      TestDataManager.updateWishlistDescription("test2","К нам уже не мчится");
+      testDataManager.updateWishlistTitle("test2","Новый год");
+      testDataManager.updateWishlistDescription("test2","К нам уже не мчится");
       loginPage.login("test2", "Test123456");
       String wishListTitle = "Новый год";
       String newWishListDescription = "К нам мчится, скоро всё.";
@@ -39,24 +38,24 @@ public class WishListTest {
           .assertsNumberOfWishLists(1)
           .assertWishListTitleEquals(wishListTitle, 1)
           .assertSubTitleEquals("К нам уже не мчится", 1)
-          .tabEditWishList(1);
+            .tapEditWishList(1);
       editWishListPage
           .assertEditWishListTitle("Изменить список желаний")
-          .editWishListTitle(newWishListDescription);
+            .editWishListTitle(newWishListDescription);
       wishListPage
           .assertsNumberOfWishLists(1)
           .assertWishListTitleEquals(wishListTitle, 1)
           .assertSubTitleEquals(newWishListDescription, 1)
-          .tabEditWishList(1);
+            .tapEditWishList(1);
    }
 
    @Test
    public void addNewWishListTest() {
+      testDataManager.deleteWishlist("vardan1");
       loginPage.login("vardan1", "Vardan.1999");
-      wishListPage.clickAddButton();
-      editWishListPage.addWishList("Новый список", "test");
-      wishListPage.assertWishListTitleEquals("Новый список", 1);
-      wishListPage.deleteWishList(1);
+      wishListPage.clickAddWishlistButton()
+          .addWishList("Новый список", "test")
+            .assertWishListTitleEquals("Новый список", 1);
    }
 
 }

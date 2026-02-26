@@ -20,7 +20,7 @@ public class AndroidDriverFactory {
    public WebDriver create() {
       try {
          return new AndroidDriver(
-             new URL("http://127.0.0.1:4723"),
+               new URL("http://127.0.0.1:4723"),
              capabilities
          );
       } catch (Exception e) {

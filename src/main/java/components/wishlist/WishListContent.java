@@ -9,7 +9,7 @@ import components.AbsComponents;
 
 public class WishListContent extends AbsComponents<WishListContent> {
 
-   private final ElementsCollection items = root.$$(id("wishlist_item"));
+   private final ElementsCollection items = root().$$(id("wishlist_item"));
 
    public WishListContent(SelenideElement root) {
       super(root);

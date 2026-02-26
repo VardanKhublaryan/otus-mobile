@@ -6,22 +6,22 @@ import static io.appium.java_client.AppiumBy.id;
 
 import com.codeborne.selenide.SelenideElement;
 import com.google.inject.Singleton;
-import components.Alert;
 import components.wishlist.WishListContent;
 import components.wishlist.WishListItem;
 import pages.AbsBasePage;
+import pages.UsersPage;
+import pages.gifts.MyGiftsPage;
 
 @Singleton
 public class MyWishListPage extends AbsBasePage {
 
    private final WishListContent wishListContent = new WishListContent($(id("wishlists")));
    private final SelenideElement addButton = $(id("add_button"));
-   private final Alert alert = new Alert($(id("parentPanel")));
 
    public MyWishListPage assertsNumberOfWishLists(int expectedSize) {
       wishListContent
           .shouldBe(visible)
-          .assertSizeEquals(expectedSize);
+            .assertSizeEquals(expectedSize);
       return this;
    }
 
@@ -35,33 +35,28 @@ public class MyWishListPage extends AbsBasePage {
       return this;
    }
 
-   public MyWishListPage tabEditWishList(int index) {
-      getWishListItem(index).tabEdit();
+   public MyWishListPage tapEditWishList(int index) {
+      getWishListItem(index).tapEdit();
       return this;
    }
 
-   public MyWishListPage clickWishList(int index){
-      getWishListItem(index).tabWishList();
-      return this;
+   public MyGiftsPage clickWishList(int index){
+      getWishListItem(index).tapWishList();
+      return new MyGiftsPage();
    }
 
    private WishListItem getWishListItem(int index) {
       return wishListContent.getItem(index).shouldBe(visible);
    }
 
-   public MyWishListPage clickAddButton(){
+   public EditWishListPage clickAddWishlistButton(){
       click(addButton);
-      return this;
+      return new EditWishListPage();
    }
 
-   public MyWishListPage deleteWishList(int index){
-      getWishListItem(index).tabDeleteButton();
-      alert
-          .shouldBeVisible()
-          .confirm()
-          .shouldNotBeVisible();
-      return this;
+   public UsersPage clickUsersTab(){
+      navigationBar.clickUsersTab();
+      return new UsersPage();
    }
-
 
 }

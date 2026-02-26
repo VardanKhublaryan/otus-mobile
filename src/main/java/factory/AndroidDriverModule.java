@@ -16,8 +16,8 @@ public class AndroidDriverModule extends AbstractModule {
    private final String deviceName = System.getProperty("deviceName", "emulator-5554");
    private final String udid = System.getProperty("udid", "emulator-5554");
    private final URL resource = Objects.requireNonNull(
-       getClass().getClassLoader().getResource("wishlist.apk"),
-       "APK file not found in test/resources"
+         getClass().getClassLoader().getResource("wishlist.apk"),
+         "APK file not found in test/resources"
    );
 
    @Provides

@@ -1,9 +1,10 @@
 import com.google.inject.Inject;
+import utils.dbutils.TestDataManager;
 import extensions.AndroidExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import pages.FilterPage;
 import pages.gifts.EditGiftPage;
-import pages.HomePage;
 import pages.LoginPage;
 import pages.gifts.MyGiftsPage;
 import pages.wishlists.MyWishListPage;
@@ -19,9 +20,6 @@ public class GiftsTest {
    private LoginPage loginPage;
 
    @Inject
-   private HomePage homePage;
-
-   @Inject
    private MyWishListPage wishListPage;
 
    @Inject
@@ -30,26 +28,32 @@ public class GiftsTest {
    @Inject
    private EditGiftPage editGiftPage;
 
+   @Inject
+   private TestDataManager testDataManager;
+
+   @Inject
+   private FilterPage filterPage;
+
+
    @Test
    public void editGiftStatusTest() {
+      testDataManager.updateGiftStatus("Ura16", "gift_743665", false);
       loginPage.login("test1", "Test123456.");
-      homePage.clickUsersTab();
-      usersPage.openFilter();
-      usersPage.searchUser("Ura16");
-      usersPage.clickUserItem(0);
-      wishListPage.clickWishList(1);
-      giftPage.clickReserveButton();
-      giftPage.isReserveButtonChecked();
-      giftPage.clickReserveButton();
+      wishListPage.clickUsersTab()
+          .openFilter()
+          .searchUser("Ura16")
+          .clickUserItem(0)
+          .clickWishList(1)
+          .clickReserveButton()
+            .isReserveButtonChecked();
    }
 
    @Test
    public void addGiftToWishListTest(){
+      testDataManager.deleteAllGifts("test3");
       loginPage.login("test3", "Test123456.");
-      wishListPage.clickWishList(1);
-      wishListPage.clickAddButton();
-      editGiftPage.createGift("test","test","200");
-      giftPage.assertGiftTitleEquals("test", 1);
-      giftPage.deleteWishList(1);
-   }
+      wishListPage.clickWishList(1)
+          .clickAddGiftButton()
+          .createGift("test","test","200")
+            .assertGiftTitleEquals("test", 1);}
 }
