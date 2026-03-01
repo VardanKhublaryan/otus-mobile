@@ -31,6 +31,7 @@ public class AndroidDriverModule extends AbstractModule {
       options.setUdid(udid);
       options.setApp(appPath);
       options.setAppPackage("ru.otus.wishlist");
+      options.clearDeviceLogsOnStart();
 
       return options;
    }

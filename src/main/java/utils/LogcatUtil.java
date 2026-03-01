@@ -9,10 +9,6 @@ import java.io.IOException;
 
 public class LogcatUtil {
 
-   public static void clearLogcat(WebDriver driver) {
-      driver.manage().logs().get("logcat");
-   }
-
    public static void saveLogcat(WebDriver driver, String testName) {
       try {
          LogEntries logs = driver.manage().logs().get("logcat");

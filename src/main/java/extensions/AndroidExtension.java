@@ -25,13 +25,6 @@ public class AndroidExtension implements TestInstancePostProcessor, BeforeEachCa
       WebDriver driver = injector.getInstance(WebDriver.class);
       WebDriverRunner.setWebDriver(driver);
       Selenide.open();
-      String deviceId = ((AndroidDriver) driver)
-            .getCapabilities()
-            .getCapability("udid")
-            .toString();
-
-      LogcatUtil.clearLogcat(driver);
-
    }
 
    @Override
@@ -40,9 +33,6 @@ public class AndroidExtension implements TestInstancePostProcessor, BeforeEachCa
       if (context.getExecutionException().isPresent()) {
 
          WebDriver driver = injector.getInstance(WebDriver.class);
-         String udid = ((AndroidDriver)driver).getCapabilities()
-               .getCapability("udid")
-               .toString();
 
          String testName = context.getRequiredTestMethod().getName();
 
