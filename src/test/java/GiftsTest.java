@@ -40,9 +40,12 @@ public class GiftsTest {
       testDataManager.updateGiftStatus("Ura16", "gift_743665", false);
       loginPage.login("test1", "Test123456.");
       wishListPage.clickUsersTab()
-          .openFilter()
-          .searchUser("Ura16")
-          .clickUserItem(0)
+            .openFilter();
+      filterPage
+          .searchUser("Ura16");
+      usersPage
+          .clickUserItem(0);
+      wishListPage
           .clickWishList(1)
           .clickReserveButton()
             .isReserveButtonChecked();

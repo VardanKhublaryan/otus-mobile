@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+@Singleton
 public class TestDataManager {
 
    private String url = System.getProperty("database_url");

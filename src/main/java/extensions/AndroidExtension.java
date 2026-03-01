@@ -1,11 +1,8 @@
 package extensions;
 
-import static java.sql.DriverManager.getDriver;
-
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import com.google.inject.Guice;
-import com.google.inject.Inject;
 import com.google.inject.Injector;
 import factory.AndroidDriverFactory;
 import factory.AndroidDriverModule;
@@ -33,7 +30,7 @@ public class AndroidExtension implements TestInstancePostProcessor, BeforeEachCa
             .getCapability("udid")
             .toString();
 
-      LogcatUtil.clearLogcat(deviceId);
+      LogcatUtil.clearLogcat(driver);
 
    }
 
@@ -49,7 +46,7 @@ public class AndroidExtension implements TestInstancePostProcessor, BeforeEachCa
 
          String testName = context.getRequiredTestMethod().getName();
 
-         LogcatUtil.saveLogcat(udid, testName);
+         LogcatUtil.saveLogcat(driver, testName);
       }
    }
 

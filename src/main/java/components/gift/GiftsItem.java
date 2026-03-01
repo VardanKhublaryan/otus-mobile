@@ -9,9 +9,9 @@ import components.AbsComponents;
 
 public class GiftsItem extends AbsComponents<GiftsItem> {
 
-   private final SelenideElement title = root().$(id("title"));
-   private final SelenideElement deleteButton = root().$(id("delete_button"));
-   private final SelenideElement item = root().$(id("wishlist_item"));
+   private final SelenideElement title = root.$(id("title"));
+   private final SelenideElement deleteButton = root.$(id("delete_button"));
+   private final SelenideElement item = root.$(id("wishlist_item"));
 
 
    public void assertTitleEquals(String expectedTitle) {

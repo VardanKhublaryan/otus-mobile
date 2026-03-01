@@ -7,7 +7,6 @@ import com.codeborne.selenide.appium.SelenideAppiumCollection;
 import com.google.inject.Singleton;
 import pages.wishlists.MyWishListPage;
 
-
 @Singleton
 public class UsersPage extends AbsBasePage{
 
@@ -18,15 +17,12 @@ public class UsersPage extends AbsBasePage{
       return this;
    }
 
-   public FilterPage openFilter(){
+   public void openFilter(){
       topAppBar.openFilter();
-      return new FilterPage();
    }
 
-
-   public MyWishListPage clickUserItem(int index){
+   public void clickUserItem(int index){
       click(usersList.get(index));
-      return new MyWishListPage();
    }
 
 }

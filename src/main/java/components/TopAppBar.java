@@ -7,7 +7,7 @@ import com.codeborne.selenide.SelenideElement;
 
 public class TopAppBar extends AbsComponents<TopAppBar> {
 
-   private final SelenideElement filterButton = root().$(id("filter"));
+   private final SelenideElement filterButton = root.$(id("filter"));
 
    public TopAppBar(SelenideElement root) {
       super(root);

@@ -7,7 +7,7 @@ import com.codeborne.selenide.SelenideElement;
 
 public class Alert extends AbsComponents<Alert> implements PopUp<Alert> {
 
-   private final SelenideElement confirmButton = root().$(id("android:id/button1"));
+   private final SelenideElement confirmButton = root.$(id("android:id/button1"));
 
    public Alert(SelenideElement root) {
       super(root);

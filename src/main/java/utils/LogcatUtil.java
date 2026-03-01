@@ -1,38 +1,35 @@
 package utils;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class LogcatUtil {
 
-   public static void clearLogcat(String deviceId) {
-      try {
-         new ProcessBuilder("adb", "-s", deviceId, "logcat", "-c")
-             .start()
-               .waitFor();
-      } catch (Exception e) {
-         throw new RuntimeException("Failed to clear logcat", e);
-      }
+   public static void clearLogcat(WebDriver driver) {
+      driver.manage().logs().get("logcat");
    }
 
-   public static void saveLogcat(String deviceId, String testName) {
+   public static void saveLogcat(WebDriver driver, String testName) {
       try {
-         File logFile = new File(
-               System.getProperty("user.dir"),
-               testName + ".log"
-         );
+         LogEntries logs = driver.manage().logs().get("logcat");
 
-         ProcessBuilder processBuilder = new ProcessBuilder(
-               "adb", "-s", deviceId, "logcat", "-d"
-         );
+         File logDir = new File(System.getProperty("user.dir"), "logs");
+         if (!logDir.exists()) logDir.mkdirs();
 
-         processBuilder.redirectOutput(logFile);
-         Process process = processBuilder.start();
-         process.waitFor();
+         File logFile = new File(logDir, testName + ".log");
 
-         System.out.println("Logcat saved: " + logFile.getAbsolutePath());
+         try (FileWriter writer = new FileWriter(logFile)) {
+            for (LogEntry entry : logs) {
+               writer.write(entry.getMessage());
+               writer.write(System.lineSeparator());
+            }
+         }
 
-      } catch (IOException | InterruptedException e) {
+      } catch (IOException e) {
          throw new RuntimeException("Failed to save logcat", e);
       }
    }
