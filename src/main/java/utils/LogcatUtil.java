@@ -1,5 +1,6 @@
 package utils;
 
+import com.google.inject.Singleton;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
@@ -7,9 +8,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+@Singleton
 public class LogcatUtil {
 
-   public static void saveLogcat(WebDriver driver, String testName) {
+   public void saveLogcat(WebDriver driver, String testName) {
       try {
          LogEntries logs = driver.manage().logs().get("logcat");
 

@@ -29,14 +29,10 @@ public class AndroidExtension implements TestInstancePostProcessor, BeforeEachCa
 
    @Override
    public void afterTestExecution(ExtensionContext context) {
-
       if (context.getExecutionException().isPresent()) {
-
          WebDriver driver = injector.getInstance(WebDriver.class);
-
          String testName = context.getRequiredTestMethod().getName();
-
-         LogcatUtil.saveLogcat(driver, testName);
+         injector.getInstance(LogcatUtil.class).saveLogcat(driver, testName);
       }
    }
 
