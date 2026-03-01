@@ -39,7 +39,8 @@ public class GiftsTest {
    public void editGiftStatusTest() {
       testDataManager.updateGiftStatus("Ura16", "gift_743665", false);
       loginPage.login("test1", "Test123456.");
-      wishListPage.clickUsersTab()
+      wishListPage.clickUsersTab();
+      usersPage
             .openFilter();
       filterPage
           .searchUser("Ura16");

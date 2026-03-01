@@ -15,4 +15,8 @@ public abstract class AbsBasePage extends AbsPageObject {
    protected final TopAppBar topAppBar = new TopAppBar(SelenideAppium.$(id("top_app_bar_layout")));
    protected final Alert alert = new Alert(SelenideAppium.$(id("parentPanel")));
 
+   public void clickUsersTab(){
+      navigationBar.clickUsersTab();
+   }
+
 }

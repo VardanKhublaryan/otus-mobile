@@ -54,9 +54,4 @@ public class MyWishListPage extends AbsBasePage {
       return new EditWishListPage();
    }
 
-   public UsersPage clickUsersTab(){
-      navigationBar.clickUsersTab();
-      return new UsersPage();
-   }
-
 }
