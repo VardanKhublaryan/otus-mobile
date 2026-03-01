@@ -9,8 +9,6 @@ import com.google.inject.Singleton;
 import components.wishlist.WishListContent;
 import components.wishlist.WishListItem;
 import pages.AbsBasePage;
-import pages.UsersPage;
-import pages.gifts.MyGiftsPage;
 
 @Singleton
 public class MyWishListPage extends AbsBasePage {
@@ -40,18 +38,16 @@ public class MyWishListPage extends AbsBasePage {
       return this;
    }
 
-   public MyGiftsPage clickWishList(int index){
+   public void clickWishList(int index){
       getWishListItem(index).tapWishList();
-      return new MyGiftsPage();
    }
 
    private WishListItem getWishListItem(int index) {
       return wishListContent.getItem(index).shouldBe(visible);
    }
 
-   public EditWishListPage clickAddWishlistButton(){
+   public void clickAddWishlistButton(){
       click(addButton);
-      return new EditWishListPage();
    }
 
 }

@@ -29,9 +29,8 @@ public class MyGiftsPage extends AbsBasePage {
       return this;
    }
 
-   public EditGiftPage clickAddGiftButton(){
+   public void clickAddGiftButton(){
       click(addButton);
-      return new EditGiftPage();
    }
 
    private GiftsItem getGiftsItem(int index) {

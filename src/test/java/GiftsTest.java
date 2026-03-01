@@ -47,7 +47,8 @@ public class GiftsTest {
       usersPage
           .clickUserItem(0);
       wishListPage
-          .clickWishList(1)
+          .clickWishList(1);
+      giftPage
           .clickReserveButton()
             .isReserveButtonChecked();
    }
@@ -56,8 +57,10 @@ public class GiftsTest {
    public void addGiftToWishListTest(){
       testDataManager.deleteAllGifts("test3");
       loginPage.login("test3", "Test123456.");
-      wishListPage.clickWishList(1)
-          .clickAddGiftButton()
-          .createGift("test","test","200")
+      wishListPage.clickWishList(1);
+      giftPage.clickAddGiftButton();
+      editGiftPage
+          .createGift("test","test","200");
+      giftPage
             .assertGiftTitleEquals("test", 1);}
 }

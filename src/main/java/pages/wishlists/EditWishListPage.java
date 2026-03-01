@@ -29,11 +29,10 @@ public class EditWishListPage extends AbsBasePage {
       return this;
    }
 
-   public MyWishListPage addWishList(String newTitle,String newDescription) {
+   public void addWishList(String newTitle,String newDescription) {
       sendKey(titleInputField,newTitle);
       sendKey(wishListDescriptionInputField,newDescription);
       click(saveButton);
-      return new MyWishListPage();
    }
 
 }

@@ -15,12 +15,11 @@ public class EditGiftPage extends AbsBasePage {
    private final SelenideElement priceInputField = $(id("price_input"));
    private final SelenideElement saveButton = $(id("save_button"));
 
-   public MyGiftsPage createGift(String name, String description, String price) {
+   public void createGift(String name, String description, String price) {
       sendKey(nameInputField,name);
       sendKey(descriptionInputField,description);
       sendKey(priceInputField,price);
       click(saveButton);
-      return new MyGiftsPage();
    }
 
 

@@ -53,8 +53,10 @@ public class WishListTest {
    public void addNewWishListTest() {
       testDataManager.deleteWishlist("vardan1");
       loginPage.login("vardan1", "Vardan.1999");
-      wishListPage.clickAddWishlistButton()
-          .addWishList("Новый список", "test")
+      wishListPage.clickAddWishlistButton();
+      editWishListPage
+          .addWishList("Новый список", "test");
+      wishListPage
             .assertWishListTitleEquals("Новый список", 1);
    }
 
