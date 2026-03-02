@@ -144,7 +144,6 @@ public class TestDataManager {
             PreparedStatement ps = connection.prepareStatement(sql)) {
 
          ps.setString(1, username);
-
          ps.executeUpdate();
 
       } catch (SQLException e) {

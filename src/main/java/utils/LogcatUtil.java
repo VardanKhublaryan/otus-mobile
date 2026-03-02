@@ -14,19 +14,15 @@ public class LogcatUtil {
    public void saveLogcat(WebDriver driver, String testName) {
       try {
          LogEntries logs = driver.manage().logs().get("logcat");
-
          File logDir = new File(System.getProperty("user.dir"), "logs");
          if (!logDir.exists()) logDir.mkdirs();
-
          File logFile = new File(logDir, testName + ".log");
-
          try (FileWriter writer = new FileWriter(logFile)) {
             for (LogEntry entry : logs) {
                writer.write(entry.getMessage());
                writer.write(System.lineSeparator());
             }
          }
-
       } catch (IOException e) {
          throw new RuntimeException("Failed to save logcat", e);
       }
